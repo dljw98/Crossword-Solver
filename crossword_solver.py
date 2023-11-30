@@ -18,27 +18,50 @@ def solve(args):
     all_words = []
     
     # Horizontal
-    # abc
-    # def
-    # ghi
+    '''
     for i in range(len(rows[0])): # Column-wise
         for j in range(len(rows)): # Row-wise
             word = rows[j][i]
             all_words.append(word)
             
-            # Horizontals
-            for k in range(i, len(rows[0])): # Column wise
+            # Going across horizontally
+            for k in range(i+1, len(rows[0])): # Column-wise
                 word += rows[j][k]
                 reverse_word = word[::-1]
                 all_words.append(word)
+                all_words.append(reverse_word)'''
+            
+    # Verticals
+    for i in range(len(rows[0])): # Column-wise
+        for j in range(len(rows)): # Row-wise
+            word = rows[j][i]
+            #print(word)
+            all_words.append(word)
+            
+            # Going down vertically
+            for k in range(j+1, len(rows)): # Row-wise
+                word += rows[k][i]
+                reverse_word = word[::-1]
+                #print(word)
+                #print(reverse_word)
+                #print('------')
+                all_words.append(word)
                 all_words.append(reverse_word)
-                        
-                        
     
+    # Diagonals (Left Up to Right Down)
+    for i in range(len(rows[0])): # Column-wise
+        for j in range(len(rows)): # Row-wise
+            word = rows[j][i]
+            all_words.append(word)
+                        
+    ''''
     valid_words = []
     for word in all_words:
         if type(dictionary.meaning(word)) == dict:
             valid_words.append(word)
     for word in valid_words:
         print(word)
-    return "Done!"
+    return "Done!"'''
+    #for word in all_words:
+    #    print(word)
+solve("abc,def,ghi")
