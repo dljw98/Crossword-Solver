@@ -1,16 +1,21 @@
 import pandas as pd
 import numpy as np
-from PyDictionary import PyDictionary
+import sys
+import os
+from english_dictionary.scripts.read_pickle import get_dict
 
 def solve():
-    user_input = input("Enter the crossword: ")
+    num_rows = int(input("Enter the number of rows:"))
+    rows = []
+    for row in range(1, num_rows+1):
+        user_input = input(f"Enter Row #{row}: ")
+        rows.append(user_input)
     minimum_length = input("Enter the minimum word length: ")
     try:
         minimum_length = int(minimum_length)
     except:
         print("Please input a valid minimum word length!")
         return
-    rows = user_input.split(",")
     length = len(rows[0])
     
     if (length < minimum_length) and (len(rows) < minimum_length):
@@ -18,13 +23,11 @@ def solve():
         return
         
     for row in rows:
-    #print(row)
         if len(row) != length:
             return "Inputted rows are not of the same length!"
         if ' ' in row:
             return "An inputted row contains a blank space!"
     
-    dictionary = PyDictionary() # Oxford dictionary package. Used to check words
     all_words = []
     
     # Horizontal
@@ -57,7 +60,6 @@ def solve():
     for i in range(len(rows[0])): # Column-wise
         for j in range(len(rows)): # Row-wise
             word = rows[j][i]
-            print(word)
             all_words.append(word)
             curr_column = i+1
             curr_row = j+1
@@ -70,19 +72,35 @@ def solve():
                 
                 curr_column += 1
                 curr_row += 1
-                print(word)
-                print(reverse_word)
-                print('------')
                 
-                        
-    ''''
+    # Diagonals (Left Down to Right Up)
+    for i in range(len(rows[0])): # Column-wise
+        for j in range(len(rows)): # Row-wise
+            word = rows[j][i]
+            all_words.append(word)
+            curr_column = i+1
+            curr_row = j-1
+            
+            while (curr_row >= 0) and (curr_column < len(rows)):
+                word += rows[curr_row][curr_column]
+                reverse_word = word[::-1]
+                all_words.append(word)
+                all_words.append(reverse_word)
+                
+                curr_column += 1
+                curr_row -= 1
+                
     valid_words = []
+    english_dict = get_dict()
+    
     for word in all_words:
-        if type(dictionary.meaning(word)) == dict:
+        if len(word) < minimum_length:
+            continue
+        if word in english_dict:
+            valid_words.append(word)
+        if word == 'kiasu': # Inside joke with my girlfriend :)
             valid_words.append(word)
     for word in valid_words:
         print(word)
-    return "Done!"'''
-    #for word in all_words:
-    #    print(word)
-solve()
+    
+    return
