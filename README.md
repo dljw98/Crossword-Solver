@@ -22,5 +22,6 @@ To start solving word searches with this tool, follow the installation instructi
 - Ensure that your word search puzzle can accomodate the minimum word length. For instance, if your word search dimensions are 3x3 and the inputted minimum word length is 4, the program will flag this and print an error message
 
 ## Sample program output
-<img width="600" alt="image" src="https://github.com/dljw98/Crossword-Solver/assets/72072042/4bb7b8af-7306-40a0-9f35-0dba57b356c6">
+<img width="300" alt="image" src="https://github.com/dljw98/Word-Search-Solver/assets/72072042/6fd96784-1448-48eb-aa81-2e40727bf63d">
+
 
