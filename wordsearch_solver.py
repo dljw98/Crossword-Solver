@@ -19,7 +19,7 @@ def solve():
     length = len(rows[0])
     
     if (length < minimum_length) and (len(rows) < minimum_length):
-        print("Crossword dimensions too small for minimum word length!")
+        print("Word search dimensions too small for minimum word length!")
         return
         
     for row in rows:

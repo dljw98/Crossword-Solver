@@ -1,3 +1,3 @@
-from crossword_solver import *
+from wordsearch_solver import *
 
 solve()
